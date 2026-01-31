@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark mode (default) */
+    --background: 0 0% 2%;
+    --background-secondary: 0 0% 3.1%;
+    --surface: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --foreground-secondary: 0 0% 53%;
+    --foreground-muted: 0 0% 27%;
+    --accent: 4 100% 59%;
+    --accent-hover: 4 100% 71%;
+    --border: 0 0% 12%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 4 100% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 3.1%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 53%;
+    --destructive: 4 100% 59%;
+    --destructive-foreground: 0 0% 100%;
+    --input: 0 0% 12%;
+    --ring: 4 100% 59%;
+    --radius: 0.5rem;
+    
+    /* Custom MinuteAI colors - Dark */
+    --void: #050505;
+    --void-secondary: #080808;
+    --surface-custom: #0a0a0a;
+    --hairline: #1f1f1f;
+    --text-primary: #fafafa;
+    --text-secondary: #888888;
+    --text-muted: #444444;
+    --alarm: #ff3b30;
+    --alarm-hover: #ff6b6b;
+    --user-block-bg: rgba(255, 255, 255, 0.1);
+    --user-block-border: rgba(255, 255, 255, 0.18);
+    --ai-block-bg: rgba(255, 59, 48, 0.15);
+    --ai-block-border: rgba(255, 59, 48, 0.35);
+    --scrollbar-track: #050505;
+    --scrollbar-thumb: #1f1f1f;
+    --grain-opacity: 0.03;
+  }
+
+  .light {
+    /* Light mode */
+    --background: 0 0% 98%;
+    --background-secondary: 0 0% 96%;
+    --surface: 0 0% 100%;
+    --foreground: 0 0% 8%;
+    --foreground-secondary: 0 0% 40%;
+    --foreground-muted: 0 0% 60%;
+    --accent: 4 90% 55%;
+    --accent-hover: 4 90% 45%;
+    --border: 0 0% 88%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+    --primary: 4 90% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 8%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 45%;
+    --destructive: 4 90% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --input: 0 0% 88%;
+    --ring: 4 90% 55%;
+    
+    /* Custom MinuteAI colors - Light */
+    --void: #fafafa;
+    --void-secondary: #f5f5f5;
+    --surface-custom: #ffffff;
+    --hairline: #e5e5e5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --alarm: #e53935;
+    --alarm-hover: #c62828;
+    --user-block-bg: rgba(0, 0, 0, 0.05);
+    --user-block-border: rgba(0, 0, 0, 0.1);
+    --ai-block-bg: rgba(229, 57, 53, 0.1);
+    --ai-block-border: rgba(229, 57, 53, 0.25);
+    --scrollbar-track: #f5f5f5;
+    --scrollbar-thumb: #d4d4d4;
+    --grain-opacity: 0.02;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--void);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  
+  code, pre, .mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    transition: opacity 0.3s ease;
+  }
+  
+  .calendar-user-block {
+    background: var(--user-block-bg);
+    border: 1px solid var(--user-block-border);
+    border-radius: 12px;
+    transition: background 0.3s ease, border 0.3s ease;
+  }
+  
+  .calendar-ai-block {
+    background: var(--ai-block-bg);
+    border: 1px solid var(--ai-block-border);
+    border-radius: 12px;
+    transition: background 0.3s ease, border 0.3s ease;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 59, 48, 0.3);
+  color: var(--text-primary);
+}
+
+.light ::selection {
+  background: rgba(229, 57, 53, 0.2);
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: 2px solid var(--alarm);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Static Stars Background */
+.static-stars-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(2px 2px at 300px 200px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 400px 150px, rgba(239,68,68,0.3), transparent),
+    radial-gradient(2px 2px at 500px 300px, rgba(255,255,255,0.2), transparent);
+  background-repeat: repeat;
+  background-size: 550px 350px;
+  animation: twinkle 4s infinite alternate;
+  opacity: 0.6;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+/* Static twinkling stars for depth */
+.static-stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(2px 2px at 300px 200px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 400px 150px, rgba(239,68,68,0.3), transparent),
+    radial-gradient(2px 2px at 500px 300px, rgba(255,255,255,0.2), transparent);
+  background-repeat: repeat;
+  background-size: 550px 350px;
+  animation: twinkle 4s infinite alternate;
+  opacity: 0.6;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
