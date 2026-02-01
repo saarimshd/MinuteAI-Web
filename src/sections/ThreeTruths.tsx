@@ -90,7 +90,7 @@ export default function ThreeTruths() {
           className="text-section font-light tracking-tight"
           style={{ color: '#fafafa', fontSize: 'clamp(32px, 4vw, 48px)', lineHeight: '1.1', letterSpacing: '-0.02em' }}
         >
-          How It Works
+          The Difference with MinuteAI
         </h2>
       </div>
 
