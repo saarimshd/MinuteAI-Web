@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Terminal, ArrowRight, Check } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +12,60 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const trustRef = useRef<HTMLParagraphElement>(null);
   const vantaRef = useRef<any>(null);
+
+  // Waitlist state
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [placeholderText, setPlaceholderText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  // Typewriter effect for placeholder
+  useEffect(() => {
+    const phrases = [
+      "Finish my assignment by Friday...",
+      "Launch my portfolio today...",
+      "Organize my chaotic thoughts...",
+      "Enter your email to join..."
+    ];
+
+    const handleTyping = () => {
+      const i = loopNum % phrases.length;
+      const fullText = phrases[i];
+
+      setPlaceholderText(
+        isDeleting
+          ? fullText.substring(0, placeholderText.length - 1)
+          : fullText.substring(0, placeholderText.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 30 : 100);
+
+      if (!isDeleting && placeholderText === fullText) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && placeholderText === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [placeholderText, isDeleting, loopNum, typingSpeed]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus('loading');
+
+    // Simulate API call
+    setTimeout(() => {
+      setStatus('success');
+      setEmail('');
+    }, 1500);
+  };
 
   useEffect(() => {
     // Initialize Vanta.js fog background
@@ -38,7 +93,7 @@ export default function Hero() {
       // Headline animation - split by words
       if (headlineRef.current) {
         const words = headlineRef.current.querySelectorAll('.word');
-        loadTl.fromTo(words, 
+        loadTl.fromTo(words,
           { y: 24, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: 'power2.out' }
         );
@@ -143,27 +198,98 @@ export default function Hero() {
           MinuteAI makes sure you actually get there and finish what you started. Speak naturally, get scheduled automatically, and never lose track of what matters again. Tell MinuteAI "Finish my assignment by friday" and watch it break the work into daily sessions, schedule them into your calendar, and remind you until it's done. From chaotic thoughts to finished tasks—without the manual sorting. Whether it's work deadlines, personal goals, or recurring life admin, MinuteAI handles it all.
         </p>
 
-        {/* CTA */}
-        <div ref={ctaRef} className="mt-10">
-          <button
-            className="inline-flex items-center justify-center px-8 py-4 text-white font-medium text-sm uppercase tracking-[0.05em] rounded-lg transition-all duration-200 hover:scale-[1.02]"
-            style={{ 
-              backgroundColor: 'var(--alarm)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--alarm-hover)';
-              e.currentTarget.style.boxShadow = '0 4px 24px rgba(255, 59, 48, 0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--alarm)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-            onClick={() => {
-              document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+        {/* CTA - Command Interface Waitlist */}
+        <div ref={ctaRef} className="mt-10 w-full max-w-lg mx-auto">
+          <form
+            onSubmit={handleSubmit}
+            className={`
+              relative group transition-all duration-500 transform
+              ${status === 'success' ? 'scale-95 opacity-0 pointer-events-none h-0 overflow-hidden' : 'scale-100 opacity-100'}
+            `}
           >
-            Be First in Line
-          </button>
+            {/* Glass Container */}
+            <div className="relative flex items-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-2 transition-all duration-300 group-focus-within:bg-white/10 group-focus-within:border-white/20 group-focus-within:shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)] hover:border-white/15">
+
+              {/* Prompt Icon */}
+              <div className="pl-4 pr-3 text-white/40">
+                <Terminal size={20} />
+              </div>
+
+              {/* Input Field with Typewriter Placeholder */}
+              <div className="relative flex-1">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-transparent border-none text-white text-lg placeholder-transparent focus:ring-0 outline-none h-12 z-10 relative"
+                  required
+                />
+
+                {/* Custom Typewriter Placeholder (Only visible when input is empty) */}
+                {email.length === 0 && (
+                  <div className="absolute inset-0 flex items-center pointer-events-none text-white/30 text-lg">
+                    <span>{placeholderText}</span>
+                    <span className="w-0.5 h-5 bg-red-500 ml-1 animate-blink"></span>
+                  </div>
+                )}
+              </div>
+
+              {/* Intelligent Submit Button */}
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className={`
+                  flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300
+                  ${email.length > 0
+                    ? 'bg-gradient-to-br from-red-600 to-red-900 text-white shadow-lg shadow-red-900/30 hover:scale-105'
+                    : 'bg-white/5 text-white/30 cursor-not-allowed'}
+                `}
+              >
+                {status === 'loading' ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <>
+                    <span>Be First</span>
+                    <ArrowRight size={16} />
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Decorative "Glow" under the bar */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-red-500/0 via-red-500/10 to-purple-500/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+          </form>
+
+          {/* Success State Display */}
+          {status === 'success' && (
+            <div className="bg-gradient-to-br from-green-500/10 to-emerald-900/10 border border-green-500/20 backdrop-blur-md rounded-2xl p-6 text-center animate-fade-in-up">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 border border-green-500/30 shadow-[0_0_15px_rgba(74,222,128,0.2)]">
+                  <Check size={24} />
+                </div>
+              </div>
+              <h3 className="text-xl font-medium text-white mb-1">Spot Reserved</h3>
+              <p className="text-white/60 text-sm">We've added you to the priority queue.</p>
+            </div>
+          )}
+
+          {/* CSS for animations */}
+          <style>{`
+            @keyframes blink {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0; }
+            }
+            .animate-blink {
+              animation: blink 1s step-end infinite;
+            }
+            @keyframes fadeInUp {
+              from { opacity: 0; transform: translateY(20px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in-up {
+              animation: fadeInUp 0.5s ease-out forwards;
+            }
+          `}</style>
         </div>
 
         {/* Trust text */}
