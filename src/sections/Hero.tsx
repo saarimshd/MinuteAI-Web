@@ -10,8 +10,27 @@ export default function Hero() {
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const trustRef = useRef<HTMLParagraphElement>(null);
+  const vantaRef = useRef<any>(null);
 
   useEffect(() => {
+    // Initialize Vanta.js fog background
+    if (sectionRef.current && (window as any).VANTA) {
+      vantaRef.current = (window as any).VANTA.FOG({
+        el: sectionRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        highlightColor: 0xf0000,
+        midtoneColor: 0x232339,
+        lowlightColor: 0x232552,
+        baseColor: 0x481919,
+        speed: 0.40,
+        zoom: 0.90
+      });
+    }
+
     const ctx = gsap.context(() => {
       // Initial load animation
       const loadTl = gsap.timeline({ delay: 0.2 });
@@ -83,7 +102,12 @@ export default function Hero() {
 
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      if (vantaRef.current) {
+        vantaRef.current.destroy();
+      }
+    };
   }, []);
 
   const headlineText = "What if you actually finished everything you started?";
@@ -93,11 +117,8 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden transition-colors duration-300"
-      style={{ backgroundColor: 'var(--void)' }}
+      style={{ backgroundColor: '#0a0a0f' }}
     >
-      {/* Static Stars Background */}
-      <div className="static-stars-bg" style={{position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0}} />
-
       {/* Main content */}
       <div className="relative z-10 max-w-[900px] mx-auto px-6 text-center">
         {/* Headline */}
@@ -119,7 +140,7 @@ export default function Hero() {
           className="mt-6 text-lg md:text-xl max-w-[600px] mx-auto leading-relaxed"
           style={{ color: 'var(--text-secondary)' }}
         >
-          You don't need another place to write tasks down. You need something that makes sure they actually happen. MinuteAI isn't a productivity app—it's the first calendar that refuses to let you drop the ball.
+          MinuteAI makes sure you actually get there and finish what you started. Speak naturally, get scheduled automatically, and never lose track of what matters again. Tell MinuteAI "Finish my assignment by friday" and watch it break the work into daily sessions, schedule them into your calendar, and remind you until it's done. From chaotic thoughts to finished tasks—without the manual sorting. Whether it's work deadlines, personal goals, or recurring life admin, MinuteAI handles it all.
         </p>
 
         {/* CTA */}

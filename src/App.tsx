@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ThemeProvider, useTheme } from './hooks/useTheme';
-import ThemeToggle from './components/ThemeToggle';
+import { ThemeProvider } from './hooks/useTheme';
 import Hero from './sections/Hero';
 import Problem from './sections/Problem';
 import ThreeTruths from './sections/ThreeTruths';
@@ -24,7 +23,7 @@ function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-void/80 backdrop-blur-md light:bg-white/80' 
+          ? 'bg-void/80 backdrop-blur-md' 
           : 'bg-transparent'
       }`}
     >
@@ -72,24 +71,19 @@ function Navigation() {
           </a>
         </div>
 
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-        </div>
+
       </div>
     </nav>
   );
 }
 
 function GrainOverlay() {
-  const { theme } = useTheme();
-  
   return (
     <div 
       className="fixed inset-0 pointer-events-none z-[9999]"
       style={{
-        opacity: theme === 'dark' ? 0.03 : 0.02,
+        opacity: 0.03,
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        transition: 'opacity 0.3s ease',
       }}
     />
   );

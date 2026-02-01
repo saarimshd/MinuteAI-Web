@@ -8,16 +8,16 @@ gsap.registerPlugin(ScrollTrigger);
 // Desktop chaotic thoughts - using grid-based positioning for better responsiveness
 const chaoticThoughtsDesktop = [
   { text: "Call mom...", size: "text-sm xl:text-base", opacity: 0.6, top: "5%", left: "5%", rotate: -3 },
-  { text: "Email professor", size: "text-xs xl:text-sm", opacity: 0.65, top: "8%", left: "40%", rotate: 1 },
-  { text: "Book flight", size: "text-xs xl:text-sm", opacity: 0.75, top: "3%", left: "70%", rotate: 3 },
-  { text: "Thesis due Thursday???", size: "text-lg xl:text-xl", opacity: 0.95, top: "22%", left: "15%", rotate: 2, urgent: true },
-  { text: "Mom's birthday panic", size: "text-base xl:text-lg", opacity: 0.9, top: "20%", left: "55%", rotate: -1 },
-  { text: "Gym? Skipped yesterday", size: "text-sm xl:text-base", opacity: 0.7, top: "25%", left: "75%", rotate: 4 },
+  { text: "Email professor", size: "text-xs xl:text-sm", opacity: 0.65, top: "12%", left: "40%", rotate: 1 },
+  { text: "Book flight", size: "text-xs xl:text-sm", opacity: 0.75, top: "8%", left: "70%", rotate: 3 },
+  { text: "Thesis due Thursday???", size: "text-lg xl:text-xl", opacity: 0.95, top: "25%", left: "15%", rotate: 2, urgent: true },
+  { text: "Mom's birthday panic", size: "text-base xl:text-lg", opacity: 0.9, top: "30%", left: "55%", rotate: -1 },
+  { text: "Gym? Skipped yesterday", size: "text-sm xl:text-base", opacity: 0.7, top: "22%", left: "75%", rotate: 4 },
   { text: "That thing Sarah mentioned...", size: "text-base xl:text-lg", opacity: 0.85, top: "45%", left: "5%", rotate: -2 },
-  { text: "Send invoice to client", size: "text-sm xl:text-base", opacity: 0.8, top: "48%", left: "35%", rotate: -4 },
+  { text: "Send invoice to client", size: "text-sm xl:text-base", opacity: 0.8, top: "50%", left: "35%", rotate: -4 },
   { text: "Pick up dry cleaning", size: "text-xs xl:text-sm", opacity: 0.5, top: "42%", left: "70%", rotate: -3, fading: true },
-  { text: "Renew passport", size: "text-sm xl:text-base", opacity: 0.7, top: "68%", left: "20%", rotate: 2 },
-  { text: "I'm forgetting something important", size: "text-xs", opacity: 0.35, top: "75%", left: "50%", rotate: -2, ghosted: true },
+  { text: "Renew passport", size: "text-sm xl:text-base", opacity: 0.7, top: "70%", left: "20%", rotate: 2 },
+  { text: "I'm forgetting something important", size: "text-xs", opacity: 0.35, top: "85%", left: "50%", rotate: -2, ghosted: true },
 ];
 
 // Mobile chaotic thoughts - vertically stacked with good spacing
@@ -38,25 +38,25 @@ const chaoticThoughtsMobile = [
 // Right side - Calendar events
 const calendarEvents = [
   // Monday
-  { day: "Mon", time: "9:00-11:00am", title: "Thesis deep work", color: "bg-blue-500/20 border-blue-500/30 light:bg-blue-500/15 light:border-blue-500/25" },
-  { day: "Mon", time: "2:00-2:30pm", title: "Email professor", color: "bg-purple-500/20 border-purple-500/30 light:bg-purple-500/15 light:border-purple-500/25" },
+  { day: "Mon", time: "9:00-11:00am", title: "Thesis deep work", color: "bg-blue-500/20 border-blue-500/30" },
+  { day: "Mon", time: "2:00-2:30pm", title: "Email professor", color: "bg-purple-500/20 border-purple-500/30" },
   // Tuesday
-  { day: "Tue", time: "10:00-11:00am", title: "Coffee w/ Sarah", subtitle: "Ask about her move", color: "bg-indigo-500/20 border-indigo-500/30 light:bg-indigo-500/15 light:border-indigo-500/25" },
-  { day: "Tue", time: "5:00-5:30pm", title: "Call Mom", color: "bg-green-500/20 border-green-500/30 light:bg-green-500/15 light:border-green-500/25" },
-  { day: "Tue", time: "5:30-6:30pm", title: "Gym - Leg day", color: "bg-red-500/20 border-red-500/30 light:bg-red-500/15 light:border-red-500/25" },
+  { day: "Tue", time: "10:00-11:00am", title: "Coffee w/ Sarah", subtitle: "Ask about her move", color: "bg-indigo-500/20 border-indigo-500/30" },
+  { day: "Tue", time: "5:00-5:30pm", title: "Call Mom", color: "bg-green-500/20 border-green-500/30" },
+  { day: "Tue", time: "5:30-6:30pm", title: "Gym - Leg day", color: "bg-red-500/20 border-red-500/30" },
   // Wednesday
-  { day: "Wed", time: "11:00am-12:00pm", title: "Book flight to NYC", color: "bg-cyan-500/20 border-cyan-500/30 light:bg-cyan-500/15 light:border-cyan-500/25" },
-  { day: "Wed", time: "4:00-4:30pm", title: "Pick up dry cleaning", color: "bg-gray-500/20 border-gray-500/30 light:bg-gray-500/15 light:border-gray-500/25" },
+  { day: "Wed", time: "11:00am-12:00pm", title: "Book flight to NYC", color: "bg-cyan-500/20 border-cyan-500/30" },
+  { day: "Wed", time: "4:00-4:30pm", title: "Pick up dry cleaning", color: "bg-gray-500/20 border-gray-500/30" },
   // Thursday
-  { day: "Thu", time: "9:00-10:30am", title: "Thesis outline", color: "bg-blue-500/20 border-blue-500/30 light:bg-blue-500/15 light:border-blue-500/25" },
-  { day: "Thu", time: "2:00-2:30pm", title: "Renew passport", color: "bg-orange-500/20 border-orange-500/30 light:bg-orange-500/15 light:border-orange-500/25" },
+  { day: "Thu", time: "9:00-10:30am", title: "Thesis outline", color: "bg-blue-500/20 border-blue-500/30" },
+  { day: "Thu", time: "2:00-2:30pm", title: "Renew passport", color: "bg-orange-500/20 border-orange-500/30" },
   // Friday
-  { day: "Fri", time: "10:00-11:00am", title: "Submit invoice", color: "bg-emerald-500/20 border-emerald-500/30 light:bg-emerald-500/15 light:border-emerald-500/25" },
-  { day: "Fri", time: "3:00-4:00pm", title: "Mom birthday prep", color: "bg-pink-500/20 border-pink-500/30 light:bg-pink-500/15 light:border-pink-500/25" },
+  { day: "Fri", time: "10:00-11:00am", title: "Submit invoice", color: "bg-emerald-500/20 border-emerald-500/30" },
+  { day: "Fri", time: "3:00-4:00pm", title: "Mom birthday prep", color: "bg-pink-500/20 border-pink-500/30" },
   // Saturday
-  { day: "Sat", time: "11:00am-12:00pm", title: "Gym - Upper body", color: "bg-red-500/20 border-red-500/30 light:bg-red-500/15 light:border-red-500/25" },
+  { day: "Sat", time: "11:00am-12:00pm", title: "Gym - Upper body", color: "bg-red-500/20 border-red-500/30" },
   // Sunday
-  { day: "Sun", time: "2:00-3:00pm", title: "Review week / Plan next", color: "bg-amber-500/20 border-amber-500/30 light:bg-amber-500/15 light:border-amber-500/25" },
+  { day: "Sun", time: "2:00-3:00pm", title: "Review week / Plan next", color: "bg-amber-500/20 border-amber-500/30" },
 ];
 
 export default function VisualDemo() {
@@ -163,33 +163,53 @@ export default function VisualDemo() {
             Your mind at 2 AM
           </p>
           
-          {/* Desktop - Absolute positioned scattered thoughts */}
-          <div className="hidden lg:block relative h-[400px] xl:h-[500px]">
-            {chaoticThoughtsDesktop.map((thought, i) => (
-              <div
-                key={i}
-                className="thought-bubble absolute max-w-[200px] xl:max-w-none"
-                style={{
-                  top: thought.top,
-                  left: thought.left,
-                  opacity: thought.opacity,
-                  transform: `rotate(${thought.rotate}deg)`,
-                }}
-              >
-                <span 
-                  className={`${thought.size}`}
-                  style={{ 
-                    color: 'var(--text-primary)',
-                    fontWeight: thought.urgent ? 600 : 400,
-                    textShadow: thought.ghosted ? '0 0 8px rgba(100, 100, 100, 0.3)' : 'none',
-                    filter: thought.fading ? 'blur(0.5px)' : 'none',
-                    wordWrap: 'break-word',
-                  }}
-                >
-                  {thought.text}
-                </span>
+          {/* Desktop - Flex column with justify-between for even vertical distribution */}
+          <div className="hidden lg:flex flex-col justify-between h-[400px] xl:h-[500px]">
+            {/* Row 1 */}
+            <div className="flex justify-between items-start px-4">
+              <div className="thought-bubble" style={{ opacity: 0.6, transform: 'rotate(-3deg)' }}>
+                <span className="text-sm xl:text-base" style={{ color: 'var(--text-primary)' }}>Call mom...</span>
               </div>
-            ))}
+              <div className="thought-bubble" style={{ opacity: 0.65, transform: 'rotate(1deg)' }}>
+                <span className="text-xs xl:text-sm" style={{ color: 'var(--text-primary)' }}>Email professor</span>
+              </div>
+              <div className="thought-bubble" style={{ opacity: 0.75, transform: 'rotate(3deg)' }}>
+                <span className="text-xs xl:text-sm" style={{ color: 'var(--text-primary)' }}>Book flight</span>
+              </div>
+            </div>
+            {/* Row 2 */}
+            <div className="flex justify-around items-start px-4">
+              <div className="thought-bubble max-w-[180px]" style={{ opacity: 0.95, transform: 'rotate(2deg)' }}>
+                <span className="text-lg xl:text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>Thesis due Thursday???</span>
+              </div>
+              <div className="thought-bubble" style={{ opacity: 0.9, transform: 'rotate(-1deg)' }}>
+                <span className="text-base xl:text-lg" style={{ color: 'var(--text-primary)' }}>Mom's birthday panic</span>
+              </div>
+              <div className="thought-bubble max-w-[120px]" style={{ opacity: 0.7, transform: 'rotate(4deg)' }}>
+                <span className="text-sm xl:text-base" style={{ color: 'var(--text-primary)' }}>Gym? Skipped yesterday</span>
+              </div>
+            </div>
+            {/* Row 3 */}
+            <div className="flex justify-between items-start px-4">
+              <div className="thought-bubble max-w-[150px]" style={{ opacity: 0.85, transform: 'rotate(-2deg)' }}>
+                <span className="text-base xl:text-lg" style={{ color: 'var(--text-primary)' }}>That thing Sarah mentioned...</span>
+              </div>
+              <div className="thought-bubble" style={{ opacity: 0.8, transform: 'rotate(-4deg)' }}>
+                <span className="text-sm xl:text-base" style={{ color: 'var(--text-primary)' }}>Send invoice to client</span>
+              </div>
+              <div className="thought-bubble" style={{ opacity: 0.5, transform: 'rotate(-3deg)', filter: 'blur(0.5px)' }}>
+                <span className="text-xs xl:text-sm" style={{ color: 'var(--text-primary)' }}>Pick up dry cleaning</span>
+              </div>
+            </div>
+            {/* Row 4 */}
+            <div className="flex justify-around items-start px-4">
+              <div className="thought-bubble" style={{ opacity: 0.7, transform: 'rotate(2deg)' }}>
+                <span className="text-sm xl:text-base" style={{ color: 'var(--text-primary)' }}>Renew passport</span>
+              </div>
+              <div className="thought-bubble" style={{ opacity: 0.35, transform: 'rotate(-2deg)', textShadow: '0 0 8px rgba(100, 100, 100, 0.3)' }}>
+                <span className="text-xs" style={{ color: 'var(--text-primary)' }}>I'm forgetting something important</span>
+              </div>
+            </div>
           </div>
 
           {/* Mobile - Flex column layout - centered with justified/staggered alignment */}
