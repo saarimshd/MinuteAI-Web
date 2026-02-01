@@ -138,7 +138,7 @@ export default function Hero() {
         <p
           ref={subheadlineRef}
           className="mt-6 text-lg md:text-xl max-w-[600px] mx-auto leading-relaxed"
-          style={{ color: 'var(--text-secondary)' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           MinuteAI makes sure you actually get there and finish what you started. Speak naturally, get scheduled automatically, and never lose track of what matters again. Tell MinuteAI "Finish my assignment by friday" and watch it break the work into daily sessions, schedule them into your calendar, and remind you until it's done. From chaotic thoughts to finished tasks—without the manual sorting. Whether it's work deadlines, personal goals, or recurring life admin, MinuteAI handles it all.
         </p>
@@ -170,7 +170,7 @@ export default function Hero() {
         <p
           ref={trustRef}
           className="mt-4 text-sm mono"
-          style={{ color: 'var(--text-muted)' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           Join the waitlist for launch updates, priority access, and early perks.
         </p>
